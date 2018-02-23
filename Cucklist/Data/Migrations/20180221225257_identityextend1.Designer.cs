@@ -4,13 +4,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cucklist.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot :ModelSnapshot
+    [Migration("20180221225257_identityextend1")]
+    partial class identityextend1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
         modelBuilder
@@ -26,14 +28,10 @@ namespace Cucklist.Data.Migrations
 
            b.Property<int>("Age");
 
-           b.Property<int>("BiologicalSex");
-
            b.Property<DateTime>("BirthDay");
 
            b.Property<string>("ConcurrencyStamp")
                     .IsConcurrencyToken();
-
-           b.Property<int>("CuckRole");
 
            b.Property<string>("Email")
                     .HasMaxLength(256);
@@ -66,9 +64,13 @@ namespace Cucklist.Data.Migrations
 
            b.Property<int>("Race");
 
+           b.Property<int>("Role");
+
            b.Property<string>("SecurityStamp");
 
-           b.Property<int>("Sexuality");
+           b.Property<int>("Sex");
+
+           b.Property<int>("SexualIdentity");
 
            b.Property<int>("SkinColor");
 

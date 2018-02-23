@@ -4,13 +4,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cucklist.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot :ModelSnapshot
+    [Migration("20180223171201_changedstuff")]
+    partial class changedstuff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
         modelBuilder
@@ -25,8 +27,6 @@ namespace Cucklist.Data.Migrations
            b.Property<int>("AccessFailedCount");
 
            b.Property<int>("Age");
-
-           b.Property<int>("BiologicalSex");
 
            b.Property<DateTime>("BirthDay");
 
@@ -68,7 +68,9 @@ namespace Cucklist.Data.Migrations
 
            b.Property<string>("SecurityStamp");
 
-           b.Property<int>("Sexuality");
+           b.Property<int>("Sex");
+
+           b.Property<int>("SexualIdentity");
 
            b.Property<int>("SkinColor");
 
