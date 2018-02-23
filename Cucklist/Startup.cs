@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using WebPWrecover.Services;
+
 namespace Cucklist
 {
     public class Startup
@@ -50,6 +52,7 @@ namespace Cucklist
 
         // Add application services.
         services.AddTransient<IEmailSender,EmailSender>();
+        services.Configure<AuthMessageSenderOptions>(Configuration);
 
         services.AddMvc();
         }
