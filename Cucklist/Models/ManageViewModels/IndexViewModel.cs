@@ -5,7 +5,7 @@ namespace Cucklist.Models.ManageViewModels
 {
     public class IndexViewModel
     {
-        private ApplicationUser user;
+
 
 
 
