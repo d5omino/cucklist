@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+using Microsoft.AspNetCore.Http;
+
 namespace Cucklist.Models.ManageViewModels
 {
     public class IndexViewModel
@@ -34,6 +36,11 @@ namespace Cucklist.Models.ManageViewModels
         public DateTime Birthday { get; set; }
         public int Weight { get; set; }
         public int Height { get; set; }
+
+        public IFormFile AvatarImage { get; set; }
+
+
+
 
 
 

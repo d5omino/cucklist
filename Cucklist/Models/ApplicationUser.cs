@@ -24,6 +24,8 @@ namespace Cucklist.Models
         public int Weight { get; set; }
         public DateTime BirthDay { get; set; }
 
+        public byte[] AvatarImage { get; set; }
+
 
 
 
