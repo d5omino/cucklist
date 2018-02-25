@@ -7,6 +7,10 @@ namespace Cucklist.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser :IdentityUser, ITraits, IApplicationUser
     {
+
+
+
+
         public int Age { get; set; }
         public Ethnicity Ethnicity { get; set; }
         public Color EyeColor { get; set; }
@@ -19,6 +23,10 @@ namespace Cucklist.Models
         public Color SkinColor { get; set; }
         public int Weight { get; set; }
         public DateTime BirthDay { get; set; }
+
+
+
+
 
         public bool Equals(Traits other)
         {

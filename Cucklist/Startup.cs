@@ -49,6 +49,7 @@ namespace Cucklist
         services.AddIdentity<ApplicationUser,IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+        services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
         // Add application services.
         services.AddTransient<IEmailSender,EmailSender>();
@@ -65,6 +66,7 @@ namespace Cucklist
         app.UseBrowserLink();
         app.UseDeveloperExceptionPage();
         app.UseDatabaseErrorPage();
+
         }
         else
         {
