@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -203,11 +202,7 @@ namespace Cucklist.Controllers
         await _userManager.UpdateAsync(user);
         }
 
-        using ( var memoryStream = new MemoryStream() )
-        {
-        await model.AvatarImage.CopyToAsync(memoryStream);
-        user.AvatarImage = memoryStream.ToArray();
-        }
+
 
 
 

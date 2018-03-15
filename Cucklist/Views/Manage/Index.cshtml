@@ -64,55 +64,14 @@
                 <select asp-for="EyeColor" asp-items="@Html.GetEnumSelectList<Color>()">Eye Color</select>
                 <label asp-for="Birthday"></label>
                 <input type="date" asp-for="Birthday" />
-
-
-
-
-
-
-
-
-
             </div>
-
-
-
             <button type="submit" class="btn btn-default">Save</button>
-
-
         </form>
 
         <h5>Posts</h5>
         <h6>Images</h6>
-        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-            <div class="form-group">
-                <div class="col-md-10">
-                    <p>Upload one or more files using this form:</p>
-                    <input type="file" name="files" multiple />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <input type="submit" value="Upload" />
-                </div>
-            </div>
-        </form>
         <h6>Stories</h6>
         <h6>Movies</h6>
-
-        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-            <div class="form-group">
-                <div class="col-md-10">
-                    <p>Upload one or more files using this form:</p>
-                    <input type="file" name="files" multiple />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <input type="submit" value="Upload" />
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 
