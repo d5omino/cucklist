@@ -1,13 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-using Cucklist.Services;
-
 using Microsoft.Extensions.Options;
 
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace WebPWrecover.Services
+namespace Cucklist.Services
 {
     public class EmailSender :IEmailSender
     {
