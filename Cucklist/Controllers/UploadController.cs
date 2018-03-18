@@ -10,12 +10,12 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Cucklist.Controllers
 {
-    public class ImageController :Controller
+    public class UploadController :Controller
     {
         public IContainerService ContainerService;
         public CloudBlobContainer Container;
 
-        public ImageController(IContainerService containerservice)
+        public UploadController(IContainerService containerservice)
         {
         ContainerService = containerservice;
         Container = ContainerService.GetBlobContainer();
