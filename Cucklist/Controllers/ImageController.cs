@@ -19,28 +19,20 @@ namespace Cucklist.Controllers
         {
         ContainerService = containerservice;
         Container = ContainerService.GetBlobContainer();
-
         }
-
         [HttpPost]
         public async Task Upload(List<IFormFile> files)
         {
-
-
         foreach ( IFormFile file in files )
         {
-
         FileInfo fileinfo = new FileInfo(file.FileName);
         CloudBlockBlob blob = Container.GetBlockBlobReference(fileinfo.Name);
         Stream filestream = file.OpenReadStream();
-
 
         using ( filestream )
         {
         await blob.UploadFromStreamAsync(filestream);
         }
-
-
 
         };
         Response.Redirect("/Manage/index");
