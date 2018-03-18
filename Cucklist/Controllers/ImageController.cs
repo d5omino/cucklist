@@ -12,11 +12,21 @@ namespace Cucklist.Controllers
 {
     public class ImageController :Controller
     {
+        public IContainerService ContainerService;
+        public CloudBlobContainer Container;
+
+        public ImageController(IContainerService containerservice)
+        {
+        ContainerService = containerservice;
+        Container = ContainerService.GetBlobContainer();
+
+        }
+
         [HttpPost]
         public async Task Upload(List<IFormFile> files)
         {
-        ContainerService CS = new ContainerService();
-        CloudBlobContainer Container = CS.GetBlobContainer();
+
+
         foreach ( IFormFile file in files )
         {
 
