@@ -1,26 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace Cucklist.Models
 {
-    public class Image
+    public class Image :IDisposable
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //Fields and Properties//
         [Key]
-        public int ImageId { get; set; }
-        public long Size { get; set; }
-        public int Height { get; set; }
-        public int Width { get; set; }
-        [Required]
-        [Url]
-        public string PathToImage { get; set; }
-        [Required]
-        [StringLength(250)]
-        public string FileName { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ImageID { get; set; }
         public string Name { get; set; }
-        public long ImageData { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string ImagePath { get; set; }
+        [Required]
+        public ApplicationUser ImageOwner { get; set; }
+        void IDisposable.Dispose() { }
+        public void GetData() { }
 
+        public Image()
+        {
+
+        }
+
+        public Image(string path)
+        {
+
+        string RecordPath = path;
+
+        }
 
     }
 }

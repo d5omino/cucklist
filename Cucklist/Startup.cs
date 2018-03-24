@@ -32,10 +32,20 @@ namespace Cucklist
 
 
 
+
+        if ( Stage == "Development" || Stage == "Local" )
+        {
         if ( Stage == "Development" )
         {
         services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(DevDb));
+        }
+        if ( Stage == "Local" )
+        {
+        services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
+        }
+
         }
         else
         {

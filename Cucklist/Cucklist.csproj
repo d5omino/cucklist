@@ -5,6 +5,15 @@
     <UserSecretsId>aspnet-Cucklist-3A1F2AC3-5CCA-45CE-9C2B-C64A65051B92</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180319151111_droppedimageclass.cs" />
+    <Compile Remove="Data\Migrations\20180319151111_droppedimageclass.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180322165826_newstuffagain.cs" />
+    <Compile Remove="Data\Migrations\20180322165826_newstuffagain.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180324132731_pingaididitagain.cs" />
+    <Compile Remove="Data\Migrations\20180324132731_pingaididitagain.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.1" />

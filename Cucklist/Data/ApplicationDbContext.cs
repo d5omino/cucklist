@@ -21,7 +21,8 @@ namespace Cucklist.Data
         }
 
         public DbSet<Cucklist.Models.Post> Post { get; set; }
-        public DbSet<Cucklist.Models.Image> Images { get; set; }
+        public DbSet<Cucklist.Models.Image> Image { get; set; }
+
 
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Cucklist.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser :IdentityUser, ITraits, IApplicationUser
+    public class ApplicationUser :IdentityUser, ITraits
     {
 
 
@@ -24,7 +24,6 @@ namespace Cucklist.Models
         public int Weight { get; set; }
         public DateTime BirthDay { get; set; }
 
-        public byte[] AvatarImage { get; set; }
 
 
 
