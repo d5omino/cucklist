@@ -90,13 +90,16 @@ namespace Cucklist.Controllers
         List<Image> UploadedImages = await CreateImageRecord(UploadImage(files).Result);
         Response.Redirect("/Manage/Index");
         }
-
+        //uploads//
         public IActionResult Uploads()
         {
-
+        //get current user//
         Task<ApplicationUser> user = _usermanager.GetUserAsync(User);
 
+        //create list of images filtered by user//
         List<Image> Images= _context.Image.Where(i=>i.ImageOwner==user.Result).ToList();
+
+        //Pass Images to VIew//
         ViewData["Images"] = Images;
 
         return View();

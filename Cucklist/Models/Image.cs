@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Cucklist.Models
 {
-    public class Image :IDisposable
+    public class Image
     {
         //Fields and Properties//
         [Key]
@@ -15,8 +14,7 @@ namespace Cucklist.Models
         public string ImagePath { get; set; }
         [Required]
         public ApplicationUser ImageOwner { get; set; }
-        void IDisposable.Dispose() { }
-        public void GetData() { }
+
 
         public Image()
         {
@@ -26,7 +24,7 @@ namespace Cucklist.Models
         public Image(string path)
         {
 
-        string RecordPath = path;
+        string ImagePath = path;
 
         }
 
