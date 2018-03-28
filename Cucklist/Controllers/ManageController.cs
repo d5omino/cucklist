@@ -56,9 +56,11 @@ namespace Cucklist.Controllers
         var user = await _userManager.GetUserAsync(User);
         List<Image>Images = _context.Image.Where(i=>i.Owner==user).ToList();
         List<Video>Videos=_context.Video.Where(v=>v.Owner==user).ToList();
+        List<Audio>Clips=_context.Audio.Where(c=>c.Owner==user).ToList();
 
         ViewData["Images"] = Images;
         ViewData["Videos"] = Videos;
+        ViewData["Clips"] = Clips;
 
 
 

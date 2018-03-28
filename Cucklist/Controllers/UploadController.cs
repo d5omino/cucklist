@@ -70,6 +70,12 @@ namespace Cucklist.Controllers
         image.Owner = await Owner;
         _context.Add(image);
         }
+        if ( path.EndsWith(".wav") || path.EndsWith(".mp3") || path.EndsWith(".wma") )
+        {
+        Audio image = new Audio(path);
+        image.Owner = await Owner;
+        _context.Add(image);
+        }
         await _context.SaveChangesAsync();
 
         }

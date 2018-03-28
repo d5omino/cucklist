@@ -1,0 +1,13 @@
+﻿
+@{
+
+    var clips = (List<Audio>) ViewData["Clips"];// Cast the list
+}
+
+<div class="Clips">
+    <h1>My Clips</h1>
+    @foreach ( Audio clip in clips )
+    {
+    <audio src="@Url.Content(clip.Path)" controls>No Supported Video Player</audio>
+    }
+</div>

@@ -22,6 +22,7 @@ namespace Cucklist.Data
 
         public DbSet<Cucklist.Models.Image> Image { get; set; }
         public DbSet<Cucklist.Models.Video> Video { get; set; }
+        public DbSet<Cucklist.Models.Audio> Audio { get; set; }
 
 
     }

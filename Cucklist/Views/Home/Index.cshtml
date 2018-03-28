@@ -10,10 +10,10 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1>Images</h1>
-            @foreach ( Image image in Model.Images )
+            <h1>Clips</h1>
+            @foreach ( Audio clip in Model.Clips )
             {
-            <img src="@image.Path" />
+            <audio src="@clip.Path" controls>your browser no audio support</audio>
             }
         </div>
     </div>
@@ -23,6 +23,15 @@
             @foreach ( Video video in Model.Videos )
             {
             <video src="@video.Path" controls>No Video Player</video>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Images</h1>
+            @foreach ( Image image in Model.Images )
+            {
+            <img src="@image.Path" controls />
             }
         </div>
     </div>

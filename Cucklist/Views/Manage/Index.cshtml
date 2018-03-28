@@ -68,12 +68,13 @@
             <button type="submit" class="btn btn-default">Save</button>
         </form>
         <form asp-action="UploadFile" asp-controller="Upload" method="post" enctype="multipart/form-data">
-            <input type="file" multiple name="Files" accept="image/*,video/*" />
+            <input type="file" multiple name="Files" accept="image/*,video/*,audio/*" />
             <input type="submit" value="Submit" />
         </form>
         <a asp-action="Uploads" asp-controller="Upload">Uploads</a>
         <div>@await Html.PartialAsync("_ImageUploadsPartial",ViewData["Images"])</div>
         <div>@await Html.PartialAsync("_VideoUploadsPartial",ViewData["Videos"])</div>
+        <div>@await Html.PartialAsync("_AudioUploadsPartial",ViewData["Audio"])</div>
 
         <a asp-action="Uploads" asp-controller="Upload">Uploads</a>
     </div>
