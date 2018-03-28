@@ -24,10 +24,6 @@ namespace Cucklist.Controllers
         public UserManager<ApplicationUser> _usermanager;
         public IHttpContextAccessor _httpcontext { get; set; }
 
-
-
-
-
         //Constructors//
         public UploadController(IContainerService containerservice,ApplicationDbContext context,UserManager<ApplicationUser> usermanager)
         {
@@ -41,68 +37,64 @@ namespace Cucklist.Controllers
         //Methods//
         //task based method that takes care of the physical upload of filies and images into an azure based storage account using blobs for each image. returns a list of cloudblockblobs that were added with this transaction//
         [HttpPost]
-        public async Task<List<CloudBlockBlob>> UploadImage(List<IFormFile> files)
+        public async Task<IActionResult> UploadFile(List<IFormFile> files)
         {
-
-        List<CloudBlockBlob> uploads = new List<CloudBlockBlob>();
         foreach ( IFormFile file in files )
         {
         FileInfo fileinfo = new FileInfo(file.FileName);
         CloudBlockBlob blob = Container.GetBlockBlobReference(fileinfo.Name);
         Stream filestream = file.OpenReadStream();
         Uri blobUri= blob.Uri;
-
-
         using ( filestream )
         {
         await blob.UploadFromStreamAsync(filestream);
-        uploads.Add(blob);
+        await CreateFileRecord(blob);
         }
-
         };
-        return uploads;
+        return Redirect("/Manage/Index");
         }
         //creates database record of image with link//
-        public async Task<List<Image>> CreateImageRecord(List<CloudBlockBlob> uploads)
+        public async Task CreateFileRecord(CloudBlockBlob blob)
         {
-        List<Image> UploadedImages = new List<Image>();
         var Owner = _usermanager.GetUserAsync(User);
-
-        foreach ( CloudBlockBlob blob in uploads )
-        {
-
         string path = blob.Uri.ToString();
-
-
-        Image image = new Image();
-        image.ImagePath = path;
-        image.ImageOwner = await Owner;
-        _context.Add(image);
-        await _context.SaveChangesAsync();
-        UploadedImages.Add(image);
-
-        }
-        return UploadedImages;
-        }
-        //calls both uploadimage and createimagerecord and returns you to your view//
-        public async Task Upload(List<IFormFile> files)
+        if ( path.EndsWith(".mpg") || path.EndsWith(".avi") || path.EndsWith(".mp4") )
         {
-        List<Image> UploadedImages = await CreateImageRecord(UploadImage(files).Result);
-        Response.Redirect("/Manage/Index");
+        Video video=new Video(path);
+        video.Owner = await Owner;
+        _context.Add(video);
         }
-        //uploads//
+        if ( path.EndsWith(".png") || path.EndsWith(".gif") || path.EndsWith(".jpg") )
+        {
+        Image image = new Image(path);
+        image.Owner = await Owner;
+        _context.Add(image);
+        }
+        await _context.SaveChangesAsync();
+
+        }
+
+        //uploads//whole method is basicly acting as UI ViewModel//
         public IActionResult Uploads()
         {
         //get current user//
         Task<ApplicationUser> user = _usermanager.GetUserAsync(User);
 
-        //create list of images filtered by user//
-        List<Image> Images= _context.Image.Where(i=>i.ImageOwner==user.Result).ToList();
+        //create list of images and videos filtered by user//
+        List<Image> Images= _context.Image.Where(i=>i.Owner==user.Result).ToList();
+        List<Video> Videos= _context.Video.Where(v=>v.Owner==user.Result).ToList();
 
-        //Pass Images to VIew//
+
+
+        //Pass Images and Videos to View//
         ViewData["Images"] = Images;
+        ViewData["Videos"] = Videos;
+
+
 
         return View();
         }
+
     }
+
 }

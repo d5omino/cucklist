@@ -1,0 +1,12 @@
+﻿
+@{
+    var images = (List<Image>) ViewData["Images"]; // Cast the list
+ }
+
+<div class="Images">
+    <h1>Images</h1>
+    @foreach ( Image image in images )
+    {
+    <img src="@Url.Content(image.Path)" />
+    }
+</div>

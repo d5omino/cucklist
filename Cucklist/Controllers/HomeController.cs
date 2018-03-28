@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 using Cucklist.Data;
 using Cucklist.Models;
+using Cucklist.Models.HomeViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +24,13 @@ namespace Cucklist.Controllers
 
         public async Task<IActionResult> Index()
         {
-        return View(await _context.Post.ToListAsync());
+
+
+        List<Image> images=await _context.Image.ToListAsync();
+        List<Video> videos=await _context.Video.ToListAsync();
+        HomeViewModel model = new HomeViewModel(images,videos);
+
+        return View(model);
         }
 
 

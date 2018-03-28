@@ -12,9 +12,10 @@ using System;
 namespace Cucklist.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180327160436_changedmodelnames")]
+    partial class changedmodelnames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,7 +104,8 @@ namespace Cucklist.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("OwnerId");
+                    b.Property<string>("OwnerId")
+                        .IsRequired();
 
                     b.Property<string>("Path");
 
@@ -114,6 +116,29 @@ namespace Cucklist.Data.Migrations
                     b.ToTable("Image");
                 });
 
+            modelBuilder.Entity("Cucklist.Models.Post", b =>
+                {
+                    b.Property<int>("PostId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Link")
+                        .IsRequired();
+
+                    b.Property<string>("Owner");
+
+                    b.Property<int>("PostType");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("PostId");
+
+                    b.ToTable("Post");
+                });
+
             modelBuilder.Entity("Cucklist.Models.Video", b =>
                 {
                     b.Property<int>("Id")
@@ -121,7 +146,8 @@ namespace Cucklist.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("OwnerId");
+                    b.Property<string>("OwnerId")
+                        .IsRequired();
 
                     b.Property<string>("Path");
 
@@ -244,14 +270,16 @@ namespace Cucklist.Data.Migrations
                 {
                     b.HasOne("Cucklist.Models.ApplicationUser", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Cucklist.Models.Video", b =>
                 {
                     b.HasOne("Cucklist.Models.ApplicationUser", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

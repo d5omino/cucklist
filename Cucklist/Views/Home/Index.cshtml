@@ -1,49 +1,31 @@
-﻿@model IEnumerable<Post>
+﻿@using Cucklist.Models.HomeViewModels
+@model HomeViewModel
+
+@{
+
+}
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Link)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Owner)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ( var item in Model )
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Owner)
-            </td>
+<div class="container">
 
-        </tr>
-        }
-    </tbody>
-</table>
-<a asp-action="Create" asp-controller="Posts">Create New</a>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Images</h1>
+            @foreach ( Image image in Model.Images )
+            {
+            <img src="@image.Path" />
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Videos</h1>
+            @foreach ( Video video in Model.Videos )
+            {
+            <video src="@video.Path" controls>No Video Player</video>
+            }
+        </div>
+    </div>
+</div>
+

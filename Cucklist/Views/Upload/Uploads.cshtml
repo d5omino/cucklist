@@ -6,10 +6,25 @@
 
 <h2>Uploads</h2>
 @{
+
     var images = (List<Image>) ViewData["Images"]; // Cast the list
+    var videos = (List<Video>) ViewData["Videos"];
+    
 }
 
-@foreach ( var image in images )
-{
-<img src="@Url.Content(image.ImagePath)" />
-}
+<div class="Images">
+    <h1>Images</h1>
+    @foreach ( Image image in images )
+    {
+    <img src="@Url.Content(image.Path)" />
+    }
+</div>
+<div class="Videos">
+    <h1> Videos</h1>
+
+    @foreach ( Video video in videos )
+    {
+    <video src="@Url.Content(video.Path)" controls>@video.Name</video>
+    }
+</div>
+

@@ -12,9 +12,10 @@ using System;
 namespace Cucklist.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180328163656_leroncaloscojones")]
+    partial class leroncaloscojones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,6 +113,29 @@ namespace Cucklist.Data.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("Cucklist.Models.Post", b =>
+                {
+                    b.Property<int>("PostId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Link")
+                        .IsRequired();
+
+                    b.Property<string>("OwnerId");
+
+                    b.Property<int>("PostType");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("PostId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Post");
                 });
 
             modelBuilder.Entity("Cucklist.Models.Video", b =>
@@ -241,6 +265,13 @@ namespace Cucklist.Data.Migrations
                 });
 
             modelBuilder.Entity("Cucklist.Models.Image", b =>
+                {
+                    b.HasOne("Cucklist.Models.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("Cucklist.Models.Post", b =>
                 {
                     b.HasOne("Cucklist.Models.ApplicationUser", "Owner")
                         .WithMany()

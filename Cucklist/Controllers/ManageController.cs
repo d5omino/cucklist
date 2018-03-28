@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
+using Cucklist.Data;
 using Cucklist.Models;
 using Cucklist.Models.ManageViewModels;
 using Cucklist.Services;
@@ -25,7 +27,7 @@ namespace Cucklist.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
-
+        private readonly ApplicationDbContext _context;
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
@@ -34,13 +36,15 @@ namespace Cucklist.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          ApplicationDbContext context)
         {
         _userManager = userManager;
         _signInManager = signInManager;
         _emailSender = emailSender;
         _logger = logger;
         _urlEncoder = urlEncoder;
+        _context = context;
         }
 
         [TempData]
@@ -50,6 +54,14 @@ namespace Cucklist.Controllers
         public async Task<IActionResult> Index()
         {
         var user = await _userManager.GetUserAsync(User);
+        List<Image>Images = _context.Image.Where(i=>i.Owner==user).ToList();
+        List<Video>Videos=_context.Video.Where(v=>v.Owner==user).ToList();
+
+        ViewData["Images"] = Images;
+        ViewData["Videos"] = Videos;
+
+
+
         if ( user == null )
         {
         throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");

@@ -9,11 +9,10 @@ namespace Cucklist.Models
         //Fields and Properties//
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ImageID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string ImagePath { get; set; }
-        [Required]
-        public ApplicationUser ImageOwner { get; set; }
+        public string Path { get; set; }
+        public ApplicationUser Owner { get; set; }
 
 
         public Image()
@@ -21,12 +20,8 @@ namespace Cucklist.Models
 
         }
 
-        public Image(string path)
-        {
+        public Image(string path) => Path = path;
 
-        string ImagePath = path;
-
-        }
 
     }
 }

@@ -20,7 +20,6 @@ namespace Cucklist.Data
         // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<Cucklist.Models.Post> Post { get; set; }
         public DbSet<Cucklist.Models.Image> Image { get; set; }
         public DbSet<Cucklist.Models.Video> Video { get; set; }
 

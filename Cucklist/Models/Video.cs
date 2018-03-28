@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cucklist.Models
 {
@@ -12,7 +8,7 @@ namespace Cucklist.Models
         //Properties and Fields//
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public ApplicationUser Owner { get; set; }
@@ -23,12 +19,9 @@ namespace Cucklist.Models
 
         }
 
-        public Video(string path)
-        {
-        Path = path;
-        }
+        public Video(string path) => Path = path;
 
-        //Methods//
+
 
     }
 }

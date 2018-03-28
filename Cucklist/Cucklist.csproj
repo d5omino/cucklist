@@ -12,6 +12,8 @@
     <Compile Remove="Data\Migrations\20180322165826_newstuffagain.Designer.cs" />
     <Compile Remove="Data\Migrations\20180324132731_pingaididitagain.cs" />
     <Compile Remove="Data\Migrations\20180324132731_pingaididitagain.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180328163120_changepostownertoapplicationuser.cs" />
+    <Compile Remove="Data\Migrations\20180328163120_changepostownertoapplicationuser.Designer.cs" />
   </ItemGroup>
 
 

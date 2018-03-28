@@ -12,9 +12,10 @@ using System;
 namespace Cucklist.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180326155039_newshit2")]
+    partial class newshit2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,20 +99,44 @@ namespace Cucklist.Data.Migrations
 
             modelBuilder.Entity("Cucklist.Models.Image", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ImageOwnerId")
+                        .IsRequired();
+
+                    b.Property<string>("ImagePath");
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("OwnerId");
+                    b.HasKey("ID");
 
-                    b.Property<string>("Path");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("ImageOwnerId");
 
                     b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("Cucklist.Models.Post", b =>
+                {
+                    b.Property<int>("PostId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Link")
+                        .IsRequired();
+
+                    b.Property<string>("Owner");
+
+                    b.Property<int>("PostType");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("PostId");
+
+                    b.ToTable("Post");
                 });
 
             modelBuilder.Entity("Cucklist.Models.Video", b =>
@@ -242,9 +267,10 @@ namespace Cucklist.Data.Migrations
 
             modelBuilder.Entity("Cucklist.Models.Image", b =>
                 {
-                    b.HasOne("Cucklist.Models.ApplicationUser", "Owner")
+                    b.HasOne("Cucklist.Models.ApplicationUser", "ImageOwner")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("ImageOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Cucklist.Models.Video", b =>
