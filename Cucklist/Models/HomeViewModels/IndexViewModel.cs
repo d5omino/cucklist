@@ -3,13 +3,13 @@
 
 namespace Cucklist.Models.HomeViewModels
 {
-    public class HomeViewModel
+    public class IndexViewModel
     {
 
         public IEnumerable<Image> Images { get; set; }
         public IEnumerable<Video> Videos { get; set; }
 
-        public HomeViewModel(IEnumerable<Image> images,IEnumerable<Video> videos)
+        public IndexViewModel(IEnumerable<Image> images,IEnumerable<Video> videos)
         {
 
         Images = images;

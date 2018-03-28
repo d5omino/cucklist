@@ -28,7 +28,7 @@ namespace Cucklist.Controllers
 
         List<Image> images=await _context.Image.ToListAsync();
         List<Video> videos=await _context.Video.ToListAsync();
-        HomeViewModel model = new HomeViewModel(images,videos);
+        IndexViewModel model = new IndexViewModel(images,videos);
 
         return View(model);
         }
