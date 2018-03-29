@@ -72,9 +72,10 @@
             <input type="submit" value="Submit" />
         </form>
         <a asp-action="Uploads" asp-controller="Upload">Uploads</a>
+        <div>@await Html.PartialAsync("_AudioUploadsPartial",ViewData["Audio"])</div>
         <div>@await Html.PartialAsync("_ImageUploadsPartial",ViewData["Images"])</div>
         <div>@await Html.PartialAsync("_VideoUploadsPartial",ViewData["Videos"])</div>
-        <div>@await Html.PartialAsync("_AudioUploadsPartial",ViewData["Audio"])</div>
+
 
         <a asp-action="Uploads" asp-controller="Upload">Uploads</a>
     </div>
