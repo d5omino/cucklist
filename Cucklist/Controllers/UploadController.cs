@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Cucklist.Data;
 using Cucklist.Models;
+using Cucklist.Models.UploadViewModels;
 using Cucklist.Services;
 
 using Microsoft.AspNetCore.Http;
@@ -85,20 +86,17 @@ namespace Cucklist.Controllers
         {
         //get current user//
         Task<ApplicationUser> user = _usermanager.GetUserAsync(User);
-
-        //create list of images and videos filtered by user//
+        //instantiate viewmodel "IndexViewModel" for Uploads//
+        //create list of images,videos , and clips filtered by user//
         List<Image> Images= _context.Image.Where(i=>i.Owner==user.Result).ToList();
         List<Video> Videos= _context.Video.Where(v=>v.Owner==user.Result).ToList();
+        List<Audio> Clips= _context.Audio.Where(v=>v.Owner==user.Result).ToList();
 
 
+        //Pass Images and Videos to View via model//
+        IndexViewModel model = new IndexViewModel(Images,Videos,Clips);
 
-        //Pass Images and Videos to View//
-        ViewData["Images"] = Images;
-        ViewData["Videos"] = Videos;
-
-
-
-        return View();
+        return View(model);
         }
 
     }

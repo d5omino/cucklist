@@ -1,8 +1,8 @@
-﻿
+﻿@model Cucklist.Models.UploadViewModels.IndexViewModel
 @{
     ViewData["Title"] = "Uploads";
 }
 
-@await Html.PartialAsync("_VideoUploadsPartial",ViewData["Videos"])
-@await Html.PartialAsync("_ImageUploadsPartial",ViewData["Images"])
-
+@await Html.PartialAsync("_VideoUploadsPartial",Model.Videos)
+@await Html.PartialAsync("_ImageUploadsPartial",Model.Images)
+@await Html.PartialAsync("_AudioUploadsPartial",Model.Clips)
