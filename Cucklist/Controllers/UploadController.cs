@@ -71,7 +71,7 @@ namespace Cucklist.Controllers
         image.Owner = await Owner;
         _context.Add(image);
         }
-        if ( path.EndsWith(".wav") || path.EndsWith(".mp3") || path.EndsWith(".wma") )
+        if ( path.EndsWith(".wav") || path.EndsWith(".mp3") || path.EndsWith(".wma") || path.EndsWith(".m4a") )
         {
         Audio image = new Audio(path);
         image.Owner = await Owner;
