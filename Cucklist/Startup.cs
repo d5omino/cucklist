@@ -52,12 +52,19 @@ namespace Cucklist
         services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(ProdDb));
         }
-
-
+        //add local identity functionality (data stored in hosted SQL database - connection string in user secrets in dev or as enviomrent varidables in production.//
         services.AddIdentity<ApplicationUser,IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
         services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
+
+        //Add microsoft account services to support MSA thrid party auth.secrets are kept in user secets locall and enviroment variables in production//
+
+        services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+        {
+        microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
+        microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
+        });
 
         // Add application services.
         services.AddTransient<IEmailSender,EmailSender>();
