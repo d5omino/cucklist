@@ -29,12 +29,17 @@ namespace Cucklist
         string Stage = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         string ProdDb=Environment.GetEnvironmentVariable("ProdDb");
         string DevDb=Configuration["DevDb"];
+        string MSAClientId = Environment.GetEnvironmentVariable("MSADevClientId");
+        string MSAPassword=Environment.GetEnvironmentVariable("MSADevPassword");
+
 
 
 
 
         if ( Stage == "Development" || Stage == "Local" )
         {
+
+
         if ( Stage == "Development" )
         {
         services.AddDbContext<ApplicationDbContext>(options =>
@@ -62,8 +67,8 @@ namespace Cucklist
 
         services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
         {
-        microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
-        microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
+        microsoftOptions.ClientId = MSAClientId;
+        microsoftOptions.ClientSecret = MSAPassword;
         });
 
         // Add application services.

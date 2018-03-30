@@ -13,7 +13,9 @@
       "launchBrowser": true,
       "launchUrl": "https://localhost:44368/",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "MSAPassword": "mbjaPSMZ1153=aucRAK4*++",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MSAClientId": " 67e8db15-43f7-409b-aabd-8659ece3189f"
       }
     },
     "Cucklist": {
