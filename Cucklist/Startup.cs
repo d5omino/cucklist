@@ -29,8 +29,8 @@ namespace Cucklist
         string Stage = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         string ProdDb=Environment.GetEnvironmentVariable("ProdDb");
         string DevDb=Configuration["DevDb"];
-        string MSAClientId = Environment.GetEnvironmentVariable("MSADevClientId");
-        string MSAPassword=Environment.GetEnvironmentVariable("MSADevPassword");
+        string MSAClientId = Environment.GetEnvironmentVariable("MSAClientId");
+        string MSAPassword=Environment.GetEnvironmentVariable("MSAPassword");
 
 
 
