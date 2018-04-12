@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace Cucklist.Data.Migrations
+namespace Cucklist.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180328183100_removedposts")]
-    partial class removedposts
+    [Migration("20180412182118_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,6 +96,24 @@ namespace Cucklist.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Cucklist.Models.Audio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("OwnerId");
+
+                    b.Property<string>("Path");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Audio");
                 });
 
             modelBuilder.Entity("Cucklist.Models.Image", b =>
@@ -240,6 +258,13 @@ namespace Cucklist.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Cucklist.Models.Audio", b =>
+                {
+                    b.HasOne("Cucklist.Models.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Cucklist.Models.Image", b =>

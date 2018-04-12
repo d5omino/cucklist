@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
+using System.Collections.Generic;
 
-namespace Cucklist.Data.Migrations
+namespace Cucklist.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,28 +24,22 @@ namespace Cucklist.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    BiologicalSex = table.Column<int>(nullable: false),
+                    BirthDay = table.Column<DateTime>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
+                    CuckRole = table.Column<int>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
+                    Ethnicity = table.Column<int>(nullable: false),
+                    EyeColor = table.Column<int>(nullable: false),
+                    HairColor = table.Column<int>(nullable: false),
+                    Height = table.Column<int>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
@@ -55,9 +47,13 @@ namespace Cucklist.Data.Migrations
                     PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    Race = table.Column<int>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
+                    Sexuality = table.Column<int>(nullable: false),
+                    SkinColor = table.Column<int>(nullable: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Weight = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,15 +146,100 @@ namespace Cucklist.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName");
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Audio",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<string>(nullable: true),
+                    Path = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Audio", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Audio_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Image",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<string>(nullable: true),
+                    Path = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Image_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Video",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<string>(nullable: true),
+                    Path = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Video", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Video_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -176,11 +257,6 @@ namespace Cucklist.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_UserId",
-                table: "AspNetUserRoles",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -189,7 +265,23 @@ namespace Cucklist.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Audio_OwnerId",
+                table: "Audio",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Image_OwnerId",
+                table: "Image",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Video_OwnerId",
+                table: "Video",
+                column: "OwnerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -208,6 +300,15 @@ namespace Cucklist.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Audio");
+
+            migrationBuilder.DropTable(
+                name: "Image");
+
+            migrationBuilder.DropTable(
+                name: "Video");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
